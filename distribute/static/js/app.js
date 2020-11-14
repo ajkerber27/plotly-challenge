@@ -20,11 +20,11 @@ function init() {
         var samples = data.samples[0].out_ids;
         var values = data.samples[0].sample_values;
 
-        console.log('Names: ${names}');
-        console.log('MetaData: ${metadata}');
-        console.log('metadata');
-        console.log('Samples: ${samples}');
-        console.log('Values: ${sample_values}');
+        console.log(`Names: ${names}`);
+        console.log(`MetaData: ${metadata}`);
+        console.log(`metadata`);
+        console.log(`Samples: ${samples}`);
+        console.log(`Values: ${sample_values}`);
 
 
         // D3 Method with standard for loop  
@@ -32,7 +32,7 @@ function init() {
         selector.html("");
         for (i = 0; i < data.names.length; i++) {
             var dropdown = selector.append("option");
-            dropdown.text('OTU $(data.names[i]}');
+            dropdown.text(`OTU $(data.names[i]}`);
             dropdown.proerty("value", data.names[i]);
         };
 
@@ -47,40 +47,40 @@ function init() {
 
 
         // Addin the metadata area
-        var metaArea = d3.select)'#sample-metadata');
+        var metaArea = d3.select(`#sample-metadata`);
     metaArea.html("");
     var metadata = data.metadata;
     var filterMetaData = metadata.filter(i => i.id == "940")
-    console.log('Filtered: ${filterMetaData[0].id}')
+    console.log(`Filtered: ${filterMetaData[0].id}`)
     console.log(filteredMetaData)
     console.log("meta-data-troubleshooting")
     console.log(metadata)
 
     Object.defineProperties(filterMetaData[0].forEach(([key, value]) => {
-        metaArea.append("p".text('$[key.toUpperCase()}: ${value}'))
+        metaArea.append("p".text(`$[key.toUpperCase()}: ${value}`))
     }));
         )
     // Generate a horizontal bar plot of one ID
     var trace = {
         type: "bar",
         orientation: "h",
-        x: data.samples[0].sample_values.slice(0, 10).reverse(),
-        y: data.samples[0].out_ids.slice(0, 10).reverse().map(x => 'OTU $[x.toString()}'),
-        text: data.samples[0].otu_labels.slice(0, 10).reverse(),
+        x: data.samples[0].sample_values.slice(0,10).reverse(),
+        y: data.samples[0].out_ids.slice(0,10).reverse().map(x => `OTU ${x.toString()}`),
+        text: data.samples[0].otu_labels.slice(0,10).reverse(),
     };
 
-    console.log(data.samples[0].otu_ids.slice(0, 10).map(x => 'OTU ${x.toString()}'));
-    console.log(data.samples[0].samples.slice(0, 10));
+    console.log(data.samples[0].otu_ids.slice(0,10).map(x => `OTU ${x.toString()}`));
+    console.log(data.samples[0].samples.slice(0,10));
 
     var chartData = [trace];
 
     var layout = {
-        title: 'Sample ID: ${data.metadat[0].id',
+        title: `Sample ID: ${data.metadat[0].id}`,
         xaxis: {
-            title: 'Sample Value',
+            title: `Sample Value`,
         },
         yaxis: {
-            title: 'Sample ID',
+            title: `Sample ID`,
         },
     };
 
@@ -92,7 +92,7 @@ function init() {
         y: data.samples[0].samples_values,
         mode: 'markers',
         market: {
-            color: data.samples[0].otu_ids",
+            color: data.samples[0].otu_ids,
             size: data.samples[0].samples_values
         }
     }
@@ -100,7 +100,7 @@ function init() {
     var bubbleData = [trace1];
     
     var layout = {
-        title:'Sample Value versus Sample ID'
+        title:`Sample Value versus Sample ID`
     };
     
     Plotly.newPlot('bubble', bubbleData, layout);
@@ -126,11 +126,11 @@ function optionChanged() {
     var result = resultsArray[0];
     console.log(result)
 
-    var metaArea = d3.select(#sample-metadata");
+    var metaArea = d3.select("#sample-metadata");
     metaArea.html("");
 
     Object.defineProperties(result).forEach(([key, value]) => {
-        metaArea.append("p").text('$[key.toUpperCase(): $[value}`);
+        metaArea.append("p").text(`$[key.toUpperCase(): $[value}`);
 
     });
     // select metadata
@@ -138,11 +138,14 @@ function optionChanged() {
     // Data filter
     var resultsArray = metadata.filter(i => i.id == inputValue)
     console.log (resultsArray)
-    var result= resultsArray[0];
+    var result = resultsArray[0];
     console.log(result)
 
-    var metaArea = d3.select(#sample-metadata");
-    metaArea.append("p").text(`$(key.toUpperCare()}: ${value}`);
+    var metaArea = d3.select("#sample-metadata");
+    metaArea.html("");
+
+    Object.defineProperties(result).forEach(([key, value]) => {
+        metaArea.append("p").text(`${key.toUpperCare()}: ${value}`);
 });
 
 
@@ -165,7 +168,7 @@ function optionChanged() {
     //horizontal bar chart
     // Restyle/Relayout Horizontal Bar Graph
     Plotly.restyle("bar", "x", [sample_values.slice(0,10).reverse()]);
-    Plotly.restyle("bar", "y", [otu_ids.slice(0,10).reverse().map(x => `OTU $[x.toString()}`]);
+    Plotly.restyle("bar", "y", [otu_ids.slice(0,10).reverse().map(x => `OTU $[x.toString()]`);
     Plotly.restyle("bar", {title: `Sample ID: ${results.id}`});
     });
 
