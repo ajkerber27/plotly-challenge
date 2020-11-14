@@ -22,7 +22,7 @@ function init() {
 
         console.log('Names: ${names}');
         console.log('MetaData: ${metadata}');
-        console.log('metadata);
+        console.log('metadata');
         console.log('Samples: ${samples}');
         console.log('Values: ${sample_values}');
 
@@ -53,6 +53,8 @@ function init() {
     var filterMetaData = metadata.filter(i => i.id == "940")
     console.log('Filtered: ${filterMetaData[0].id}')
     console.log(filteredMetaData)
+    console.log("meta-data-troubleshooting")
+    console.log(metadata)
 
     Object.defineProperties(filterMetaData[0].forEach(([key, value]) => {
         metaArea.append("p".text('$[key.toUpperCase()}: ${value}'))
@@ -90,7 +92,7 @@ function init() {
         y: data.samples[0].samples_values,
         mode: 'markers',
         market: {
-            color: data.samples[0].otu_ids,
+            color: data.samples[0].otu_ids",
             size: data.samples[0].samples_values
         }
     }
@@ -102,7 +104,7 @@ function init() {
     };
     
     Plotly.newPlot('bubble', bubbleData, layout);
-    
+
     });
 }
 init()
@@ -110,35 +112,62 @@ init()
 
 function optionChanged() {
 
-    // restyle meta
-    // restyle bubble chart
-    // restyle horizontal bar chart
-
     // select input box
+    var inputValue = d3.select("#selDataset").node().value
+    console.log(inputValue)
 
     // bring in data
-
+    d3.json("samples.json").then((data) => {
 
     // Filter the data for the object with the desired sample number
+    var resultsArray = metadata.filter(i => i.id == inputValue)
+    var result = resultsArray[0];
+    console.log(resultsArray)
+    var result = resultsArray[0];
+    console.log(result)
 
+    var metaArea = d3.select(#sample-metadata");
+    metaArea.html("");
 
+    Object.defineProperties(result).forEach(([key, value]) => {
+        metaArea.append("p").text('$[key.toUpperCase(): $[value}`);
+
+    });
     // select metadata
-
-
-
+    var metadata = data.metadata;
     // Data filter
+    var resultsArray = metadata.filter(i => i.id == inputValue)
+    console.log (resultsArray)
+    var result= resultsArray[0];
+    console.log(result)
+
+    var metaArea = d3.select(#sample-metadata");
+    metaArea.append("p").text(`$(key.toUpperCare()}: ${value}`);
+});
 
 
+    var samples = data.samples;
+    var resultsArray2 = samples.filter(i => i.id == inputValue)
+    var result2 = resultsArray2[0];
+
+    var otu_ids = results2.otu_ids;
+    var otu_lables = result2.otu_labels;
+    var sample_values = results2.samples_values;
 
     // bubble chart update
     // Restyle Bubble Chart    
+    Plotly.restyle("bubble", "x", [otu_ids]);
+    Plotly.restyle("bubble", "y", [sample_values]);
+    Plotly.restyle("bubble", "marker", {color: otu_ids, size: sample_values});
 
 
 
     //horizontal bar chart
     // Restyle/Relayout Horizontal Bar Graph
-
-
+    Plotly.restyle("bar", "x", [sample_values.slice(0,10).reverse()]);
+    Plotly.restyle("bar", "y", [otu_ids.slice(0,10).reverse().map(x => `OTU $[x.toString()}`]);
+    Plotly.restyle("bar", {title: `Sample ID: ${results.id}`});
+    });
 
 }
 
